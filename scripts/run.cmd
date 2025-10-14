@@ -1,0 +1,3 @@
+@echo off
+echo Running Api...
+dotnet run --project "TaskManagement.API"
