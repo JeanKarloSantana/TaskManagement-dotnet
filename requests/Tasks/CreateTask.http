@@ -1,0 +1,14 @@
+@host=http://localhost:5000
+@adminId=12345
+
+POST {{host}}
+Content-Type: application/json
+
+{
+  "userId": "12345",
+  "title": "New Task",
+  "description": "This is a new task.",
+  "dueDate": "2024-12-31T23:59:59Z",
+  "priority": "High",
+  "status": "Open"
+}
