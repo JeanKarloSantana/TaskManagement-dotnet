@@ -1,14 +1,14 @@
-@host=http://localhost:5000
-@adminId=12345
+@host=http://localhost:5071
+@adminId=a3f8c7b2-51e9-4d6a-8c42-7f1b95d0e3a1
 
-POST {{host}}
+POST {{host}}/Tasks
 Content-Type: application/json
 
-{
-  "userId": "12345",
+{  
+  "userId": "{{adminId}}",
   "title": "New Task",
   "description": "This is a new task.",
   "dueDate": "2024-12-31T23:59:59Z",
   "priority": "High",
-  "status": "Open"
+  "status": "Open"    
 }
