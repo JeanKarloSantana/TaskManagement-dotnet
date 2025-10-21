@@ -6,7 +6,7 @@ namespace TaskManagement.API.Controllers
 {
   [ApiController]
   [Route("[controller]")]
-  public class TasksController(ICustomMediator mediator) : ControllerBase
+  public class TasksController(IDependencyMediator mediator) : ControllerBase
   {
     [HttpPost]
     //public async Task<IActionResult> CreateTask(CreateTaskRequest request)
