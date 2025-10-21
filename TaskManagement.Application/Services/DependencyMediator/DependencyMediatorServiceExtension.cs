@@ -1,53 +1,37 @@
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+
 public static class DependencyMediatorServiceExtensions
 {
-  public static IServiceCollection AddCustomMediator(
-      this IServiceCollection services,
-      params Assembly[] assemblies)
+  public static IServiceCollection AddCustomMediator(this IServiceCollection services, Assembly assembly)
   {
-    if (assemblies.Length == 0)
-    {
-      throw new ArgumentException("At least one assembly must be provided");
-    }
+    // Register mediator infrastructure
+    services.AddScoped<IDependencyMediator, DependencyMediator>(); // Your mediator implementation
 
-    // Register the mediator itself
-    services.AddScoped<ICustomMediator, CustomMediator>();
+    // Automatic handler discovery
+    var handlerTypes = assembly.GetTypes()
+        .Where(t => t.IsClass && !t.IsAbstract)
+        .Select(t => new { Type = t, Interfaces = t.GetInterfaces() })
+        .Where(t => t.Interfaces.Any(i =>
+            i.IsGenericType &&
+            i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>)))
+        .ToList();
 
-    // Scan and register handlers from all provided assemblies
-    foreach (var assembly in assemblies)
+    foreach (var handler in handlerTypes)
     {
-      RegisterHandlersFromAssembly(services, assembly);
+      var handlerInterface = handler.Interfaces.First(i =>
+          i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>));
+
+      services.AddScoped(handlerInterface, handler.Type);
     }
 
     return services;
   }
 
-  public static IServiceCollection AddCustomMediatorFromAssemblyContaining<T>(
-      this IServiceCollection services)
+  // Keep this helper method for flexibility, but you might not need it
+  public static IServiceCollection AddCustomMediatorFromAssemblyContaining<T>(this IServiceCollection services)
   {
     return services.AddCustomMediator(typeof(T).Assembly);
   }
 
-  private static void RegisterHandlersFromAssembly(IServiceCollection services, Assembly assembly)
-  {
-    var handlerTypes = assembly.GetTypes()
-        .Where(t => !t.IsAbstract && !t.IsInterface)
-        .Select(t => new
-        {
-          Type = t,
-          HandlerInterfaces = t.GetInterfaces()
-                .Where(i => i.IsGenericType &&
-                           (i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
-                            i.GetGenericTypeDefinition() == typeof(INotificationHandler<>)))
-                .ToList()
-        })
-        .Where(x => x.HandlerInterfaces.Any());
-
-    foreach (var handler in handlerTypes)
-    {
-      foreach (var handlerInterface in handler.HandlerInterfaces)
-      {
-        services.AddTransient(handlerInterface, handler.Type);
-      }
-    }
-  }
 }

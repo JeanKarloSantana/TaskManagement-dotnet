@@ -11,7 +11,6 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
-builder.Services.AddCustomMediatorFromAssemblyContaining<GetUserQueryHandler>();
 
 var app = builder.Build();
 
