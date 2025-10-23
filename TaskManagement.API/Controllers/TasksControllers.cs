@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Application.Services;
+using TaskManagement.Application.Tasks.Commands.CreateTask;
 using TaskManagement.Contracts.Tasks;
 
 namespace TaskManagement.API.Controllers
@@ -10,13 +11,20 @@ namespace TaskManagement.API.Controllers
   {
     [HttpPost]
     //public async Task<IActionResult> CreateTask(CreateTaskRequest request)
-     public async Task<ActionResult<User>> GetUser(int id)
+    public async Task<ActionResult<User>> GetUser(Guid userId, string title, string description, DateTime dueDate, string priority, string status)
     {
-      //var taskId = tasksService.CreateTask(request.userId, request.title, request.description, request.dueDate, request.priority, request.status);
-      var query = new GetUserQuery { UserId = id };
-      var user = await mediator.Send(query);
-      return Ok(user);
-      //return Ok(taskId);
+      var command = new CreateTaskCommand(userId, title, description, dueDate, priority, status);
+
+      var createTaskResult = await mediator.Send(command);
+
+      if (createTaskResult.IsError)
+      {
+        return Problem();
+      }
+
+      var response = new CreateTaskResponse(createTaskResult.Value);
+
+      return Ok(response);
     }
   }
 }
