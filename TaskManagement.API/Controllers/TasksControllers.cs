@@ -10,21 +10,14 @@ namespace TaskManagement.API.Controllers
   public class TasksController(IDependencyMediator mediator) : ControllerBase
   {
     [HttpPost]
-    //public async Task<IActionResult> CreateTask(CreateTaskRequest request)
-    public async Task<ActionResult<User>> GetUser(Guid userId, string title, string description, DateTime dueDate, string priority, string status)
+    public async Task<ActionResult> CreateTask([FromQuery] Guid userId, [FromQuery] string title, [FromQuery] string description, [FromQuery] DateTime dueDate, [FromQuery] string priority, [FromQuery] string status)
     {
       var command = new CreateTaskCommand(userId, title, description, dueDate, priority, status);
-
+      Console.WriteLine("Sending CreateTaskCommand...");
       var createTaskResult = await mediator.Send(command);
 
-      if (createTaskResult.IsError)
-      {
-        return Problem();
-      }
-
-      var response = new CreateTaskResponse(createTaskResult.Value);
-
-      return Ok(response);
+      return createTaskResult.MatchFirst(guid => Ok(new CreateTaskResponse(guid)),
+      error => Problem());
     }
   }
 }
