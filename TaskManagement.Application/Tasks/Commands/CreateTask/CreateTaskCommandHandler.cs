@@ -7,6 +7,7 @@ namespace TaskManagement.Application.Tasks.Commands.CreateTask
   {
     public async Task<ErrorOr<Guid>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
     {
+      Console.WriteLine("Creating task...");
       return Guid.NewGuid();
     }
   }
