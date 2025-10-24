@@ -1,14 +1,14 @@
 @host=http://localhost:5071
 @adminId=a3f8c7b2-51e9-4d6a-8c42-7f1b95d0e3a1
 
-POST {{host}}/Tasks?userId=12345678-1234-1234-1234-123456789abc&title=Complete%20project%20documentation&description=Write%20comprehensive%20documentation&dueDate=2024-12-31T23:59:59&priority=High&status=Pending
+POST {{host}}/WorkItems
 Content-Type: application/json
 
-//{
- // "userId": "12345678-1234-1234-1234-123456789abc",
- // "title": "Complete project documentation",
- // "description": "Write comprehensive documentation for the new feature",
- // "dueDate": "2024-12-31T23:59:59",
-//  "priority": "High",
- // "status": "Pending"
-//}  
+{
+  "userId": "12345678-1234-1234-1234-123456789abc",
+  "title": "Complete project documentation",
+  "description": "Write comprehensive documentation for the new feature",
+  "dueDate": "2024-12-31T23:59:59",
+  "priority": "High",
+  "status": "Pending"
+}  
