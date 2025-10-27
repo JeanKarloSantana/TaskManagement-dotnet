@@ -5,10 +5,10 @@ using TaskManagement.Domain.WorkItems;
 namespace TaskManagement.Application.WorkItems.Commands.CreateWorkItem
 
 {
-  public class CreateWorkItemCommandHandler(IWorkItemRepository workItemRepository /*IUnitOfWork unitOfWork*/) : IRequestHandler<CreateWorkItemCommand, ErrorOr<WorkItem>>
+  public class CreateWorkItemCommandHandler(IWorkItemRepository workItemRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateWorkItemCommand, ErrorOr<WorkItem>>
   {
     private readonly IWorkItemRepository _workItemRepository = workItemRepository;
-    //private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
     public async Task<ErrorOr<WorkItem>> Handle(CreateWorkItemCommand request, CancellationToken cancellationToken)
     {
@@ -24,8 +24,7 @@ namespace TaskManagement.Application.WorkItems.Commands.CreateWorkItem
       };
 
       await _workItemRepository.AddWorkItemAsync(workItem);
-
-      //await _unitOfWork.CommitChangesAsync();
+      await _unitOfWork.CommitChangesAsync();
 
       return workItem;
     }
