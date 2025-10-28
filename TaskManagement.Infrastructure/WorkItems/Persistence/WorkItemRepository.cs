@@ -10,8 +10,14 @@ namespace TaskManagement.Infrastructure.WorkItems.Persistence
     public Task AddWorkItemAsync(WorkItem workItem)
     {
       _workItems.Add(workItem);
-      
+
       return Task.CompletedTask;
+    }
+
+    public Task<WorkItem> GetWorkItemByIdAsync(Guid workItemId)
+    {
+      var workItem = _workItems.FirstOrDefault(wi => wi.Id == workItemId);
+      return Task.FromResult(workItem);
     }
   }
 }
