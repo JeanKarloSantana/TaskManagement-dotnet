@@ -12,16 +12,15 @@ namespace TaskManagement.Application.WorkItems.Commands.CreateWorkItem
 
     public async Task<ErrorOr<WorkItem>> Handle(CreateWorkItemCommand request, CancellationToken cancellationToken)
     {
-      var workItem = new WorkItem
-      {
+      var workItem = new WorkItem(
         Id = Guid.NewGuid(),
         UserId = request.UserId,
         Title = request.Title,
         Description = request.Description,
         DueDate = request.DueDate,
-        Priority = request.Priority,
+        WorkItemPriorityType = request.Priority,
         Status = request.Status
-      };
+      );
 
       await _workItemRepository.AddWorkItemAsync(workItem);
       await _unitOfWork.CommitChangesAsync();
