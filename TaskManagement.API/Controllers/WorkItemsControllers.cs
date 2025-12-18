@@ -16,7 +16,7 @@ namespace TaskManagement.API.Controllers
 
       var createWorkItemResult = await mediator.Send(command);
 
-      return createWorkItemResult.MatchFirst(workItem => Ok(new CreateWorkItemResponse(workItem.UserId, workItem.Title, workItem.Description, workItem.DueDate, workItem.Priority, workItem.Status)),
+      return createWorkItemResult.MatchFirst(workItem => Ok(new CreateWorkItemResponse(workItem.UserId, workItem.Title, workItem.Description, workItem.DueDate, workItem.WorkItemPriorityType, workItem.WorkItemStatusType)),
       error => Problem());
     }
   }

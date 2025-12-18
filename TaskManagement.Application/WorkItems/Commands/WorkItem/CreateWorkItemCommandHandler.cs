@@ -20,7 +20,7 @@ namespace TaskManagement.Application.WorkItems.Commands.CreateWorkItem
         Description = request.Description,
         DueDate = request.DueDate,
         WorkItemPriorityType = request.Priority,
-        Status = request.Status
+        WorkItemStatusType = request.Status
       };
 
       await _workItemRepository.AddWorkItemAsync(workItem);
