@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using TaskManagement.Application.Common.Interfaces;
 using TaskManagement.Application.Services;
 
 namespace TaskManagement.Application
