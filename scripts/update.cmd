@@ -1,0 +1,3 @@
+@echo off
+echo Running Migration...
+dotnet ef database update --project "TaskManagement.Infrastructure"

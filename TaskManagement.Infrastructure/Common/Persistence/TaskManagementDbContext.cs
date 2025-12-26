@@ -25,10 +25,6 @@ namespace TaskManagement.Infrastructure.Common.Persistence
 
       modelBuilder.ApplyConfigurationsFromAssembly(
           Assembly.GetExecutingAssembly());
-
-
-      modelBuilder.Ignore<WorkItemPriorityType>();
-      modelBuilder.Ignore<WorkItemStatusType>();
     }
   }
 }

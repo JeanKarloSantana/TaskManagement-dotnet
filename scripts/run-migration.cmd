@@ -1,0 +1,3 @@
+@echo off
+echo Running Migration...
+dotnet ef migrations add "FirstMigration" --project "TaskManagement.Infrastructure" --context "TaskManagementDbContext"
