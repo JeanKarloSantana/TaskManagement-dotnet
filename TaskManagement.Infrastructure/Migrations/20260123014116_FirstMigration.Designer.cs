@@ -12,7 +12,7 @@ using TaskManagement.Infrastructure.Common.Persistence;
 namespace TaskManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagementDbContext))]
-    [Migration("20251226032701_FirstMigration")]
+    [Migration("20260123014116_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
