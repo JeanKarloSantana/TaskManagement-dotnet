@@ -3,7 +3,7 @@ namespace TaskManagement.Domain.WorkItems
 {
   public class WorkItem
   {
-    public WorkItem() { }
+    private WorkItem() { }
 
     public WorkItem(Guid userId, string title, string description,
                     DateTime dueDate, WorkItemPriorityType workItemPriorityType,
@@ -18,12 +18,12 @@ namespace TaskManagement.Domain.WorkItems
       WorkItemStatusType = workItemStatusType;
     }
 
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public Guid UserId { get; set; }
-    public required string Title { get; set; }
-    public required string Description { get; set; }
-    public DateTime DueDate { get; set; }
-    public required WorkItemPriorityType WorkItemPriorityType { get; set; }
-    public required WorkItemStatusType WorkItemStatusType { get; set; }
+    public Guid Id { get; private set; } = Guid.NewGuid();
+    public Guid UserId { get; private set; }
+    public string Title { get; private set; }
+    public string Description { get; private set; }
+    public DateTime DueDate { get; private set; }
+    public WorkItemPriorityType WorkItemPriorityType { get; private set; }
+    public WorkItemStatusType WorkItemStatusType { get; private set; }
   }
 }

@@ -1,0 +1,3 @@
+@echo off
+echo Running Migration...
+dotnet ef migrations remove --project "TaskManagement.Infrastructure"

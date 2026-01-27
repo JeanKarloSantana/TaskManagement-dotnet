@@ -27,8 +27,7 @@ public static class DependencyMediatorServiceExtensions
 
     return services;
   }
-
-  // Keep this helper method for flexibility, but you might not need it
+ 
   public static IServiceCollection AddCustomMediatorFromAssemblyContaining<T>(this IServiceCollection services)
   {
     return services.AddCustomMediator(typeof(T).Assembly);

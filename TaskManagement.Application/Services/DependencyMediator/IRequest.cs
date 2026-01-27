@@ -4,7 +4,6 @@ public interface IRequest : IRequest<Unit> { }
 public interface INotification { }
 public record Unit;
 
-// Handler interfaces
 public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
   Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken = default);
