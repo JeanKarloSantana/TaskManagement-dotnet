@@ -5,10 +5,9 @@ POST {{host}}/WorkItems
 Content-Type: application/json
 
 {
-  "userId": "12345678-1234-1234-1234-123456789abc",
-  "title": "Complete project documentation",
-  "description": "Write comprehensive documentation for the new feature",
-  "dueDate": "2024-12-31T23:59:59",
-  "priority": "High",
-  "status": "Pending"
-}  
+  "UserId": "12345678-1234-1234-1234-123456789abc",
+  "Title": "Complete project documentation",
+  "Description": "Write comprehensive documentation for the new feature",
+  "WorkItemPriorityType": "High",
+  "WorkItemStatusType": "ToDo"
+}
