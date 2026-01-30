@@ -1,6 +1,8 @@
+using TaskManagement.Domain.ApplicationUser;
+
 namespace TaskManagement.Application.Common.Interfaces
 {
-  public interface IApplicationUserRepository
+  public interface IApplicationUserRepository : IBaseRepository<ApplicationUser>
   {
 
   }

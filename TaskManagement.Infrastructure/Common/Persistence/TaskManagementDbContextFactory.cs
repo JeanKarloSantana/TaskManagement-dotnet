@@ -26,7 +26,11 @@ namespace TaskManagement.Infrastructure.Common.Persistence
             optionsBuilder.UseSqlServer(
                 configuration.GetConnectionString("DeimosDbContext"));
 
-            return new TaskManagementDbContext(optionsBuilder.Options);
+            return new TaskManagementDbContext(optionsBuilder.Options)
+            {
+                ApplicationUser = null!,
+                WorkItems = null!
+            };
         }
     }
 }

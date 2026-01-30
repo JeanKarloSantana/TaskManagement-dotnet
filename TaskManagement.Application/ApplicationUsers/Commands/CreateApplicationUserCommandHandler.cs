@@ -1,13 +1,14 @@
 using ErrorOr;
 using TaskManagement.Application.Common.Interfaces;
+using TaskManagement.Domain.ApplicationUser;
 
 namespace TaskManagement.Application.ApplicationUsers.Commands
 
 {
-  public class CreateApplicationUserCommandHandler(IApplicationUserRepository applicationUserRepository/*, IUnitOfWork unitOfWork*/) : IRequestHandler<CreateApplicationUserCommand, ErrorOr<ApplicationUser>>
+  public class CreateApplicationUserCommandHandler(IApplicationUserRepository applicationUserRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateApplicationUserCommand, ErrorOr<ApplicationUser>>
   {
     private readonly IApplicationUserRepository _applicationUserRepository = applicationUserRepository;
-    // private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
     public async Task<ErrorOr<ApplicationUser>> Handle(CreateApplicationUserCommand request, CancellationToken cancellationToken)
     {
@@ -18,8 +19,8 @@ namespace TaskManagement.Application.ApplicationUsers.Commands
         request.Password
       );
 
-      await _applicationUserRepository.AddApplicationUserAsync(applicationUser);
-      //await _unitOfWork.CommitChangesAsync();
+      _applicationUserRepository.Add(applicationUser);
+      _unitOfWork.Complete();
 
       return applicationUser;
     }

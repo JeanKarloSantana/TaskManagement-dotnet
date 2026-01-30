@@ -2,20 +2,16 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Application.Common.Interfaces;
+using TaskManagement.Domain.ApplicationUser;
 using TaskManagement.Domain.WorkItems;
-
 
 namespace TaskManagement.Infrastructure.Common.Persistence
 {
-
-  public class TaskManagementDbContext(DbContextOptions<TaskManagementDbContext> options) : IdentityDbContext<ApplicationUser>(options), IUnitOfWork
+  public class TaskManagementDbContext(DbContextOptions<TaskManagementDbContext> options) : IdentityDbContext<ApplicationUser>(options)
   {
-    public DbSet<WorkItem> WorkItems { get; set; }
+    public required DbSet<ApplicationUser> ApplicationUser { get; set; }
+    public required DbSet<WorkItem> WorkItems { get; set; }
 
-    public Task CommitChangesAsync()
-    {
-      throw new NotImplementedException();
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
