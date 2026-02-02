@@ -1,8 +1,8 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TaskManagement.Application.Common.Interfaces;
-using TaskManagement.Domain.ApplicationUser;
+using TaskManagement.Domain.ApplicationUsers;
+using TaskManagement.Domain.UserWorkItems;
 using TaskManagement.Domain.WorkItems;
 
 namespace TaskManagement.Infrastructure.Common.Persistence
@@ -11,6 +11,7 @@ namespace TaskManagement.Infrastructure.Common.Persistence
   {
     public required DbSet<ApplicationUser> ApplicationUser { get; set; }
     public required DbSet<WorkItem> WorkItems { get; set; }
+    public required DbSet<UserWorkItem> UserWorkItems { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

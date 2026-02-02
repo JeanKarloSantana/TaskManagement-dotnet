@@ -1,4 +1,4 @@
-using TaskManagement.Domain.ApplicationUser;
+using TaskManagement.Domain.ApplicationUsers;
 
 namespace TaskManagement.Application.Common.Interfaces
 {

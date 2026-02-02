@@ -29,7 +29,8 @@ namespace TaskManagement.Infrastructure.Common.Persistence
             return new TaskManagementDbContext(optionsBuilder.Options)
             {
                 ApplicationUser = null!,
-                WorkItems = null!
+                WorkItems = null!,
+                UserWorkItems = null!
             };
         }
     }

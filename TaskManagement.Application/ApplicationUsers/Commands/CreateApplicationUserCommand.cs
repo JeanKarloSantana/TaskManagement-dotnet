@@ -1,5 +1,5 @@
 using ErrorOr;
-using TaskManagement.Domain.ApplicationUser;
+using TaskManagement.Domain.ApplicationUsers;
 
 namespace TaskManagement.Application.ApplicationUsers.Commands
 {

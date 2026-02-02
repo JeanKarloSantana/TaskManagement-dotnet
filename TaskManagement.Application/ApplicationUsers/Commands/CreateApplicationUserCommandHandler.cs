@@ -1,28 +1,30 @@
 using ErrorOr;
 using TaskManagement.Application.Common.Interfaces;
-using TaskManagement.Domain.ApplicationUser;
+using TaskManagement.Domain.ApplicationUsers;
 
 namespace TaskManagement.Application.ApplicationUsers.Commands
 
 {
-  public class CreateApplicationUserCommandHandler(IApplicationUserRepository applicationUserRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateApplicationUserCommand, ErrorOr<ApplicationUser>>
+  public class CreateApplicationUserCommandHandler(IApplicationUserRepository applicationUserRepository, IUnitOfWork unitOfWork) //: IRequestHandler<CreateApplicationUserCommand, ErrorOr<ApplicationUser>>
   {
     private readonly IApplicationUserRepository _applicationUserRepository = applicationUserRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public async Task<ErrorOr<ApplicationUser>> Handle(CreateApplicationUserCommand request, CancellationToken cancellationToken)
+    /*public async Task<ErrorOr<ApplicationUser>> Handle(CreateApplicationUserCommand request, CancellationToken cancellationToken)
     {
-      var applicationUser = new ApplicationUser(
-        request.Username,
-        request.Email,
-        request.EmailConfirmed,
-        request.Password
-      );
+      var user = new ApplicationUser
+      {
+        UserName = username,
+        Email = email,
+        EmailConfirmed = false
+      };
 
-      _applicationUserRepository.Add(applicationUser);
-      _unitOfWork.Complete();
+      var result = await _userManager.CreateAsync(user, password);
 
-      return applicationUser;
-    }
+      if (!result.Succeeded)
+      {
+        // handle errors
+      }
+    }*/
   }
 }
