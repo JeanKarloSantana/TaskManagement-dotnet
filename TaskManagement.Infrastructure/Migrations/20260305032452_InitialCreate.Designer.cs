@@ -12,8 +12,8 @@ using TaskManagement.Infrastructure.Common.Persistence;
 namespace TaskManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagementDbContext))]
-    [Migration("20260131043404_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20260305032452_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,7 +158,7 @@ namespace TaskManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TaskManagement.Domain.ApplicationUser.ApplicationUser", b =>
+            modelBuilder.Entity("TaskManagement.Domain.ApplicationUsers.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -226,6 +226,21 @@ namespace TaskManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("TaskManagement.Domain.UserWorkItems.UserWorkItem", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("WorkItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "WorkItemId");
+
+                    b.HasIndex("WorkItemId");
+
+                    b.ToTable("UserWorkItems", (string)null);
+                });
+
             modelBuilder.Entity("TaskManagement.Domain.WorkItems.WorkItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -270,7 +285,7 @@ namespace TaskManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TaskManagement.Domain.ApplicationUser.ApplicationUser", null)
+                    b.HasOne("TaskManagement.Domain.ApplicationUsers.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -279,7 +294,7 @@ namespace TaskManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TaskManagement.Domain.ApplicationUser.ApplicationUser", null)
+                    b.HasOne("TaskManagement.Domain.ApplicationUsers.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -294,7 +309,7 @@ namespace TaskManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TaskManagement.Domain.ApplicationUser.ApplicationUser", null)
+                    b.HasOne("TaskManagement.Domain.ApplicationUsers.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -303,11 +318,40 @@ namespace TaskManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("TaskManagement.Domain.ApplicationUser.ApplicationUser", null)
+                    b.HasOne("TaskManagement.Domain.ApplicationUsers.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TaskManagement.Domain.UserWorkItems.UserWorkItem", b =>
+                {
+                    b.HasOne("TaskManagement.Domain.ApplicationUsers.ApplicationUser", "User")
+                        .WithMany("UserWorkItems")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TaskManagement.Domain.WorkItems.WorkItem", "WorkItem")
+                        .WithMany("UserWorkItems")
+                        .HasForeignKey("WorkItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("WorkItem");
+                });
+
+            modelBuilder.Entity("TaskManagement.Domain.ApplicationUsers.ApplicationUser", b =>
+                {
+                    b.Navigation("UserWorkItems");
+                });
+
+            modelBuilder.Entity("TaskManagement.Domain.WorkItems.WorkItem", b =>
+                {
+                    b.Navigation("UserWorkItems");
                 });
 #pragma warning restore 612, 618
         }
