@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Application.Services;
+using TaskManagement.Application.WorkItems.Commands;
 using TaskManagement.Application.WorkItems.Commands.CreateWorkItem;
 using TaskManagement.Contracts.WorkItems;
 using TaskManagement.Domain.WorkItems;
@@ -25,13 +26,11 @@ namespace TaskManagement.API.Controllers
         return Problem(statusCode: StatusCodes.Status400BadRequest, detail: "Invalid WorkItemStatusType");
       }
 
-      return Ok();
+      var command = new CreateWorkItemCommand(UserId: request.UserId, Title: request.Title, Description: request.Description, DueDate: request.DueDate, Priority: workItemPriority, Status: workItemStatus);
+      var createWorkItemResult = await mediator.Send(command);
 
-      //var command = new CreateWorkItemCommand(UserId: request.UserId, Title: request.Title, Description: request.Description, DueDate: request.DueDate, Priority: workItemPriority, Status: workItemStatus);
-      //var createWorkItemResult = await mediator.Send(command);
-
-      //return createWorkItemResult.MatchFirst(workItem => Ok(new CreateWorkItemResponse(workItem.UserId, workItem.Title, workItem.Description, workItem.DueDate, workItem.WorkItemPriorityType, workItem.WorkItemStatusType)),
-      //error => Problem());
+      return createWorkItemResult.MatchFirst(workItem => Ok(new CreateWorkItemResponse(workItem.UserId, workItem.Title, workItem.Description, workItem.DueDate, workItem.WorkItemPriorityType, workItem.WorkItemStatusType)),
+      error => Problem());
     }
   }
 }

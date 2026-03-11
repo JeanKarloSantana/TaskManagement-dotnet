@@ -15,6 +15,7 @@ namespace TaskManagement.Infrastructure
         options.UseSqlServer(
           configuration.GetConnectionString("DeimosDbContext")));
 
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddScoped<IWorkItemRepository, WorkItemRepository>();
 
       return services;

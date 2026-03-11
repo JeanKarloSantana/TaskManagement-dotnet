@@ -52,44 +52,44 @@ public class DependencyMediator : IDependencyMediator
 
 public class GetUserQuery : IRequest<User>
 {
-    public int UserId { get; set; }
+  public int UserId { get; set; }
 }
 
 public class User
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+  public int Id { get; set; }
+  public string Name { get; set; }
 }
 
 public class GetUserQueryHandler : IRequestHandler<GetUserQuery, User>
 {
-    public async Task<User> Handle(GetUserQuery request, CancellationToken cancellationToken)
-    {
-        // Your logic here
-        return await Task.FromResult(new User { Id = request.UserId, Name = "John Doe" });
-    }
+  public async Task<User> Handle(GetUserQuery request, CancellationToken cancellationToken)
+  {
+    // Your logic here
+    return await Task.FromResult(new User { Id = request.UserId, Name = "John Doe" });
+  }
 }
 
 // Notification example
 public class UserCreatedEvent : INotification
 {
-    public int UserId { get; set; }
+  public int UserId { get; set; }
 }
 
 public class EmailNotificationHandler : INotificationHandler<UserCreatedEvent>
 {
-    public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
-    {
-        // Send email logic
-        await Task.CompletedTask;
-    }
+  public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
+  {
+    // Send email logic
+    await Task.CompletedTask;
+  }
 }
 
 public class AuditNotificationHandler : INotificationHandler<UserCreatedEvent>
 {
-    public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
-    {
-        // Audit logic
-        await Task.CompletedTask;
-    }
+  public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
+  {
+    // Audit logic
+    await Task.CompletedTask;
+  }
 }

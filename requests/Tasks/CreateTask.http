@@ -1,4 +1,4 @@
-@host=http://localhost:5071
+@host=http://localhost:5000
 @adminId=a3f8c7b2-51e9-4d6a-8c42-7f1b95d0e3a1
 
 POST {{host}}/WorkItems

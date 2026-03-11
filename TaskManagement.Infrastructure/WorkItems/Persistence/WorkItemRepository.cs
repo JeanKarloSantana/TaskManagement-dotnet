@@ -11,7 +11,7 @@ namespace TaskManagement.Infrastructure.WorkItems.Persistence
 
     public Task AddWorkItemAsync(WorkItem workItem)
     {
-      _workItems.Add(workItem);
+      Add(workItem);
 
       return Task.CompletedTask;
     }

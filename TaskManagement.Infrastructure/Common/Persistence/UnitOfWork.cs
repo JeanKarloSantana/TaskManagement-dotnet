@@ -15,18 +15,18 @@ namespace TaskManagement.Infrastructure.Common.Persistence
       WorkItemRepository = new WorkItemRepository(_dbContext);
     }
 
-    public int Complete()
+    public Task<int> Complete()
     {
-      throw new NotImplementedException();
+      return _dbContext.SaveChangesAsync();
     }
 
     public void Dispose()
     {
-      throw new NotImplementedException();
+      _dbContext.Dispose();
     }
 
-    public IWorkItemRepository WorkItemRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public IApplicationUserRepository ApplicationUserRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public IWorkItemRepository WorkItemRepository { get; set; }
+    public IApplicationUserRepository ApplicationUserRepository { get; set; }
 
 
   }

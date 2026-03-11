@@ -2,7 +2,7 @@ namespace TaskManagement.Application.Common.Interfaces
 {
   public interface IUnitOfWork
   {
-    int Complete();
+    Task<int> Complete();
     void Dispose();
 
     public IWorkItemRepository WorkItemRepository { get; set; }
