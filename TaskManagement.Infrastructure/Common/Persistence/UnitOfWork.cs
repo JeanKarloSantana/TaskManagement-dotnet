@@ -26,8 +26,5 @@ namespace TaskManagement.Infrastructure.Common.Persistence
     }
 
     public IWorkItemRepository WorkItemRepository { get; set; }
-    public IApplicationUserRepository ApplicationUserRepository { get; set; }
-
-
   }
 }

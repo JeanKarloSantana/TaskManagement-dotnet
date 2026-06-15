@@ -5,14 +5,11 @@ namespace TaskManagement.Domain.UserWorkItems
 {
   public class UserWorkItem
   {
-    public UserWorkItem(
-      ApplicationUser userId,
-      WorkItem workItemId)
+    protected UserWorkItem(string userId)
     {
-      User = userId;
-      WorkItem = workItemId;
+      UserId = userId;
+      WorkItemId = new Guid();
     }
-    private UserWorkItem() { }
 
     public string UserId { get; set; }
     public Guid WorkItemId { get; set; }

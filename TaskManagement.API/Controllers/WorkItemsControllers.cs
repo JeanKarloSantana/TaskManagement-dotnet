@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TaskManagement.Application.Services;
 using TaskManagement.Application.WorkItems.Commands;
-using TaskManagement.Application.WorkItems.Commands.CreateWorkItem;
 using TaskManagement.Contracts.WorkItems;
-using TaskManagement.Domain.WorkItems;
 using DomainWorkItemPriorityType = TaskManagement.Domain.WorkItems.WorkItemPriorityType;
 using DomainWorkItemStatusType = TaskManagement.Domain.WorkItems.WorkItemStatusType;
 

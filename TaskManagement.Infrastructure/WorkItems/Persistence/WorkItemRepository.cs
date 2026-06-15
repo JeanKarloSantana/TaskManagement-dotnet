@@ -7,7 +7,7 @@ namespace TaskManagement.Infrastructure.WorkItems.Persistence
 
   public class WorkItemRepository(TaskManagementDbContext context) : BaseRepository<WorkItem>(context), IWorkItemRepository
   {
-    private readonly static List<WorkItem> _workItems = new();
+    private readonly static List<WorkItem> _workItems = [];
 
     public Task AddWorkItemAsync(WorkItem workItem)
     {
@@ -16,9 +16,10 @@ namespace TaskManagement.Infrastructure.WorkItems.Persistence
       return Task.CompletedTask;
     }
 
-    public Task<WorkItem> GetWorkItemByIdAsync(Guid workItemId)
+    public Task<WorkItem?> GetWorkItemByIdAsync(Guid workItemId)
     {
-      var workItem = _workItems.FirstOrDefault(wi => wi.Id == workItemId);
+      WorkItem? workItem = _workItems.FirstOrDefault(wi => wi.Id == workItemId);
+      
       return Task.FromResult(workItem);
     }
   }

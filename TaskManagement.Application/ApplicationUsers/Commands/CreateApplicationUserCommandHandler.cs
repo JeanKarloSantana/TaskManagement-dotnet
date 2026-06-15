@@ -5,9 +5,8 @@ using TaskManagement.Domain.ApplicationUsers;
 namespace TaskManagement.Application.ApplicationUsers.Commands
 
 {
-  public class CreateApplicationUserCommandHandler(IApplicationUserRepository applicationUserRepository, IUnitOfWork unitOfWork) //: IRequestHandler<CreateApplicationUserCommand, ErrorOr<ApplicationUser>>
+  public class CreateApplicationUserCommandHandler(IUnitOfWork unitOfWork) //: IRequestHandler<CreateApplicationUserCommand, ErrorOr<ApplicationUser>>
   {
-    private readonly IApplicationUserRepository _applicationUserRepository = applicationUserRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
     /*public async Task<ErrorOr<ApplicationUser>> Handle(CreateApplicationUserCommand request, CancellationToken cancellationToken)
