@@ -5,12 +5,7 @@ namespace TaskManagement.Domain.ApplicationUsers
 {
   public class ApplicationUser : IdentityUser
   {
-    protected ApplicationUser()
-    {
-      CreationDate = DateTime.UtcNow;
-    }
-
-     public DateTime CreationDate { get; set; }
-     public ICollection<UserWorkItem> UserWorkItems { get; set; } = new HashSet<UserWorkItem>();
+    public DateTime CreationDate { get; set; } = DateTime.UtcNow;
+    public ICollection<UserWorkItem> UserWorkItems { get; set; } = new HashSet<UserWorkItem>();
   }
 }
