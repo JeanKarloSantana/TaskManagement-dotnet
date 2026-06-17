@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TaskManagement.Application.Common.Interfaces;
+using TaskManagement.Domain.ApplicationUsers;
 using TaskManagement.Infrastructure.Common.Persistence;
 using TaskManagement.Infrastructure.WorkItems.Persistence;
 
@@ -15,6 +17,12 @@ namespace TaskManagement.Infrastructure
         options.UseSqlServer(
           configuration.GetConnectionString("DeimosDbContext")));
 
+      services
+        .AddIdentityCore<ApplicationUser>()
+        .AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<TaskManagementDbContext>();
+
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddScoped<IWorkItemRepository, WorkItemRepository>();
 
       return services;

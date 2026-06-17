@@ -1,3 +1,3 @@
 @echo off
 echo Running Api...
-dotnet run --project "TaskManagement.API"
+dotnet watch run --project "TaskManagement.API"
