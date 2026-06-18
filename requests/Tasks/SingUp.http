@@ -4,7 +4,7 @@ POST {{host}}/SingUp
 Content-Type: application/json
 
 {
-    "username": "Raul",
-    "email": "R4@gmail.com",
-    "password": "R4@99OverPower"
+    "username": "d",
+    "email": "jason@gmail.com",
+    "password": "R4@99O"
 }
