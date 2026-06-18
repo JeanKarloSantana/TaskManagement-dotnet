@@ -16,7 +16,9 @@ namespace TaskManagement.API.Controllers
             var command = new CreateUserCommand(request.UserName, request.Email, request.Password);
             var createUserResult = await mediator.Send(command);
             return createUserResult.MatchFirst(user => Ok(user),
-            error => Problem(error.Code));
+            error => Problem(
+                statusCode: StatusCodes.Status400BadRequest,
+                detail: error.Description));
         }
     }
 }
