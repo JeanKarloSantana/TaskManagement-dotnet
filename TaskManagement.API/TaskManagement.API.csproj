@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>TaskManagement-dotnet-API-4f391e6f-c418-44f5-a4d5-c0674b92b061</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,14 @@
+@host=http://localhost:5071
+
+# @name login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "raul@example.com",
+  "password": "R4@99OverPower"
+}
+
+### Use this header on protected requests:
+# Authorization: Bearer {{login.response.body.$.accessToken}}

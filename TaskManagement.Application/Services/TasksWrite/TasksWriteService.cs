@@ -1,5 +1,5 @@
 
-namespace TaskManagement.Application.Services
+namespace TaskManagement.Application.Services.TasksWrite
 {
   public class TasksService : ITasksService
   {

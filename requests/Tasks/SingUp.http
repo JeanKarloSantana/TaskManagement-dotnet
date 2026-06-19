@@ -1,10 +1,10 @@
 @host=http://localhost:5071
 
-POST {{host}}/SingUp
+POST {{host}}/api/auth/signup
 Content-Type: application/json
 
 {
-    "username": "d",
-    "email": "jason@gmail.com",
-    "password": "R4@99O"
+    "username": "Raul",
+    "email": "raul@example.com",
+    "password": "R4@99OverPower"
 }

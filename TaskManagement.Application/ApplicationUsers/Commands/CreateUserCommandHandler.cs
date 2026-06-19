@@ -5,7 +5,7 @@ using TaskManagement.Domain.ApplicationUsers;
 namespace TaskManagement.Application.ApplicationUsers.Commands
 
 {
-  public class CreateApplicationUserCommandHandler(UserManager<ApplicationUser> userManager) : IRequestHandler<CreateUserCommand, ErrorOr<bool>>
+  public class CreateUserCommandHandler(UserManager<ApplicationUser> userManager) : IRequestHandler<CreateUserCommand, ErrorOr<bool>>
   {
 
     private readonly UserManager<ApplicationUser> _userManager = userManager;
@@ -15,8 +15,7 @@ namespace TaskManagement.Application.ApplicationUsers.Commands
       var user = new ApplicationUser
       {
         UserName = request.UserName,
-        Email = request.Email,
-        PasswordHash = request.Password
+        Email = request.Email
       };
 
       var result = await _userManager.CreateAsync(user, request.Password);
