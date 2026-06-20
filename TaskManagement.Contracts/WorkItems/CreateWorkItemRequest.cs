@@ -1,4 +1,4 @@
 namespace TaskManagement.Contracts.WorkItems
 {
-  public record CreateWorkItemRequest(Guid UserId, string Title, string Description, DateTime DueDate, string WorkItemPriorityType, string WorkItemStatusType);
+  public record CreateWorkItemRequest(string Title, string Description, DateTime DueDate, string WorkItemPriorityType, string WorkItemStatusType);
 }

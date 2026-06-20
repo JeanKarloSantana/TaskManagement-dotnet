@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Application.WorkItems.Commands;
 using TaskManagement.Contracts.WorkItems;
@@ -10,9 +12,17 @@ namespace TaskManagement.API.Controllers
   [Route("[controller]")]
   public class WorkItemsController(IDependencyMediator mediator) : ControllerBase
   {
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> CreateWorkItem(CreateWorkItemRequest request)
     {
+      var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+      if (!Guid.TryParse(userIdClaim, out var userId))
+      {
+        return Unauthorized();
+      }
+
       if (!DomainWorkItemPriorityType.TryFromName(request.WorkItemPriorityType.ToString(), out var workItemPriority))
       {
         return Problem(statusCode: StatusCodes.Status400BadRequest, detail: "Invalid WorkItemPriorityType");
@@ -23,7 +33,7 @@ namespace TaskManagement.API.Controllers
         return Problem(statusCode: StatusCodes.Status400BadRequest, detail: "Invalid WorkItemStatusType");
       }
 
-      var command = new CreateWorkItemCommand(UserId: request.UserId, Title: request.Title, Description: request.Description, DueDate: request.DueDate, Priority: workItemPriority, Status: workItemStatus);
+      var command = new CreateWorkItemCommand(UserId: userId, Title: request.Title, Description: request.Description, DueDate: request.DueDate, Priority: workItemPriority, Status: workItemStatus);
       var createWorkItemResult = await mediator.Send(command);
 
       return createWorkItemResult.MatchFirst(workItem => Ok(new CreateWorkItemResponse(workItem.UserId, workItem.Title, workItem.Description, workItem.DueDate, workItem.WorkItemPriorityType, workItem.WorkItemStatusType)),
