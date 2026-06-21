@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TaskManagement.Domain.WorkItems;
 
+namespace TaskManagement.Infrastructure.WorkItems.Persistence;
 public class WorkItemConfiguration : IEntityTypeConfiguration<WorkItem>
 {
     public void Configure(EntityTypeBuilder<WorkItem> builder)

@@ -9,11 +9,11 @@ using DomainWorkItemStatusType = TaskManagement.Domain.WorkItems.WorkItemStatusT
 namespace TaskManagement.API.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+   [Route("api/workitem")]
   public class WorkItemsController(IDependencyMediator mediator) : ControllerBase
   {
     [Authorize]
-    [HttpPost]
+    [HttpPost("create")]
     public async Task<ActionResult> CreateWorkItem(CreateWorkItemRequest request)
     {
       var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -40,4 +40,10 @@ namespace TaskManagement.API.Controllers
       error => Problem());
     }
   }
+
+  /*[Authorize]
+  [HttpGet("get/all/by/user-id")]
+  public async Task<ActionResult> GetWorkItemByUserId() {
+
+  }*/
 }

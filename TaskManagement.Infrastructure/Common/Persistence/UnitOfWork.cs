@@ -1,4 +1,5 @@
 using TaskManagement.Application.Common.Interfaces;
+using TaskManagement.Infrastructure.WorkItemDates.Persistance;
 using TaskManagement.Infrastructure.WorkItems.Persistence;
 
 namespace TaskManagement.Infrastructure.Common.Persistence
@@ -13,6 +14,7 @@ namespace TaskManagement.Infrastructure.Common.Persistence
       _dbContext = dbContext;
 
       WorkItemRepository = new WorkItemRepository(_dbContext);
+      WorkItemDateRepository = new WorkItemDateRepository(_dbContext);
     }
 
     public Task<int> Complete()
@@ -26,5 +28,6 @@ namespace TaskManagement.Infrastructure.Common.Persistence
     }
 
     public IWorkItemRepository WorkItemRepository { get; set; }
+    public IWorkItemDateRepository WorkItemDateRepository { get; set; }
   }
 }

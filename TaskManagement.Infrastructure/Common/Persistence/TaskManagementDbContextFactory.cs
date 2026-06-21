@@ -30,7 +30,8 @@ namespace TaskManagement.Infrastructure.Common.Persistence
             {
                 ApplicationUser = null!,
                 WorkItems = null!,
-                UserWorkItems = null!
+                UserWorkItems = null!,
+                WorkItemDates = null!
             };
         }
     }

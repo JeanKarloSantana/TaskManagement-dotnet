@@ -6,5 +6,6 @@ namespace TaskManagement.Application.Common.Interfaces
     void Dispose();
 
     public IWorkItemRepository WorkItemRepository { get; set; }
+    public IWorkItemDateRepository WorkItemDateRepository { get; set; }
   }
 }

@@ -1,4 +1,5 @@
 using TaskManagement.Domain.UserWorkItems;
+using TaskManagement.Domain.WorkItemDates;
 
 namespace TaskManagement.Domain.WorkItems
 
@@ -30,6 +31,8 @@ namespace TaskManagement.Domain.WorkItems
     public DateTime DueDate { get; private set; }
     public WorkItemPriorityType WorkItemPriorityType { get; private set; } = default!;
     public WorkItemStatusType WorkItemStatusType { get; private set; } = default!;
+    public WorkItemDate? WorkItemDate { get; private set; }
     public ICollection<UserWorkItem> UserWorkItems { get; set; } = new HashSet<UserWorkItem>();
+
   }
 }
