@@ -1,0 +1,24 @@
+@host=http://localhost:5071
+
+# @name login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "R4@gmail.com",
+  "password": "R4@99OverPower"
+}
+
+###
+
+POST {{host}}/api/work-items/dates/update
+Authorization: Bearer {{login.response.body.$.accessToken}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "WorkItemId": "A61CDA35-39CD-44BA-ADED-5B27F2DC4846",
+  "StartDate": "2026-07-05T12:00:00Z",
+  "CloseDate": "2026-06-05T12:00:00Z"
+}

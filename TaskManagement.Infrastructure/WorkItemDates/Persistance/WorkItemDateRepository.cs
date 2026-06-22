@@ -6,5 +6,10 @@ namespace TaskManagement.Infrastructure.WorkItemDates.Persistance;
 
 public class WorkItemDateRepository(TaskManagementDbContext context) : BaseRepository<WorkItemDate>(context), IWorkItemDateRepository
 {
+    public Task AddWorkItemDate(WorkItemDate workItemDate)
+    {
+        Add(workItemDate);
 
+        return Task.CompletedTask;
+    }
 }

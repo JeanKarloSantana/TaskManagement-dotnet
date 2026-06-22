@@ -11,6 +11,7 @@ using TaskManagement.Application.Services.JwtGenerator;
 using TaskManagement.Domain.ApplicationUsers;
 using TaskManagement.Infrastructure.Authentication;
 using TaskManagement.Infrastructure.Common.Persistence;
+using TaskManagement.Infrastructure.WorkItemDates.Persistance;
 using TaskManagement.Infrastructure.WorkItems.Persistence;
 
 namespace TaskManagement.Infrastructure
@@ -71,6 +72,7 @@ namespace TaskManagement.Infrastructure
 
       services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddScoped<IWorkItemRepository, WorkItemRepository>();
+      services.AddScoped<IWorkItemDateRepository, WorkItemDateRepository>();
 
       return services;
     }

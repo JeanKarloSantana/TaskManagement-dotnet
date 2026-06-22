@@ -9,7 +9,7 @@ using DomainWorkItemStatusType = TaskManagement.Domain.WorkItems.WorkItemStatusT
 namespace TaskManagement.API.Controllers
 {
   [ApiController]
-   [Route("api/workitem")]
+  [Route("api/workitems")]
   public class WorkItemsController(IDependencyMediator mediator) : ControllerBase
   {
     [Authorize]

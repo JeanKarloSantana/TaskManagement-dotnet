@@ -12,8 +12,8 @@ namespace TaskManagement.Domain.WorkItemDates
         }
         private WorkItemDate() { }
         public Guid Id { get; set; }
-        public DateTime StartDate { get; private set; }
-        public DateTime? CloseDate { get; private set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? CloseDate { get; set; }
         public WorkItem WorkItem { get; private set; } = default!;
     }
 }
